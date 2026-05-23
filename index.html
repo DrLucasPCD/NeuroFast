@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="NeuroFAST: triagem visual experimental para sinais compatíveis com AVC."
+    />
+    <title>NeuroFAST</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" id="homeScreen">
+        <div class="brand-lockup">
+          <p class="eyebrow">Triagem visual experimental</p>
+          <h1>NeuroFAST</h1>
+          <p class="lead">Triagem visual experimental para sinais compatíveis com AVC.</p>
+        </div>
+
+        <div class="notice notice-fixed" role="alert">
+          Este sistema não substitui atendimento médico. Em suspeita de AVC, procure emergência imediatamente.
+        </div>
+
+        <p class="medical-note">Ferramenta experimental. Não realiza diagnóstico médico.</p>
+
+        <button class="primary-action" id="startButton" type="button">Iniciar triagem</button>
+      </section>
+
+      <section class="test-screen is-hidden" id="testScreen" aria-live="polite">
+        <div class="notice compact" role="alert">
+          Ferramenta experimental. Não realiza diagnóstico médico.
+        </div>
+
+        <div class="camera-frame">
+          <video id="cameraPreview" autoplay playsinline muted></video>
+          <canvas id="captureCanvas" width="224" height="224" aria-hidden="true"></canvas>
+          <div class="camera-placeholder" id="cameraPlaceholder">Câmera aguardando permissão</div>
+        </div>
+
+        <div class="step-panel">
+          <p class="step-count" id="stepCount">Etapa 1 de 4</p>
+          <h2 id="instructionText">Olhe para a câmera e fique parado</h2>
+          <div class="progress-track" aria-label="Progresso da etapa">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <p class="status-text" id="statusText">Preparando análise local...</p>
+        </div>
+
+        <div class="action-row">
+          <button class="secondary-action" id="repeatButton" type="button" disabled>Repetir</button>
+        </div>
+      </section>
+
+      <section class="result-screen is-hidden" id="resultScreen" aria-live="assertive">
+        <div class="notice compact" role="alert">
+          Ferramenta experimental. Não realiza diagnóstico médico.
+        </div>
+
+        <div class="result-card" id="resultCard">
+          <p class="eyebrow">Resultado visual</p>
+          <h2 id="resultTitle">Baixo risco visual</h2>
+          <p id="resultDescription">
+            Nenhuma etapa apresentou assimetria facial visual persistente.
+          </p>
+        </div>
+
+        <div class="emergency-note is-hidden" id="emergencyNote" role="alert">
+          Se houver fraqueza em um lado do corpo, fala enrolada, boca torta ou confusão mental,
+          acione emergência imediatamente.
+        </div>
+
+        <div class="summary-list" id="summaryList"></div>
+
+        <button class="primary-action" id="restartButton" type="button">Nova triagem</button>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
